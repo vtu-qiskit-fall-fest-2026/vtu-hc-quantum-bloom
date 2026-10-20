@@ -307,6 +307,6 @@ Released under the [MIT License](LICENSE). See `LICENSE` for details.
 **Quantum Bloom** · Team ID `VTU-QFF-HC-0160` · Tier `Online`
 · Built with ⚛️ Qiskit for the VTU-QFF Hackathon
 
-[⬆ Back to Top](#Quantum Bloom)
+[⬆ Back to Top](#quantum-bloom)
 
 </div>
