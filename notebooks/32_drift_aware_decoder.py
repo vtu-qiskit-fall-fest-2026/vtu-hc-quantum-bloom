@@ -20,6 +20,8 @@ from pathlib import Path
 
 import numpy as np
 
+from qtrace.qec.drift_policies import policy, initial_tables
+
 from qtrace.qec.drift import fisher_p_two_sided, detect_shift
 
 
@@ -125,60 +127,6 @@ def confidence(a: int, b: int) -> float:
     )
 
 
-def policy(
-    counts: np.ndarray,
-    method: str
-) -> np.ndarray:
-
-    counts = np.asarray(counts, dtype=int)
-
-    if counts.shape != (8,) or np.any(counts < 0):
-        raise ValueError(
-            "expected eight non-negative counts"
-        )
-
-    table = STANDARD.copy()
-
-    if method == "standard":
-        return table
-
-    for s in range(4):
-
-        a = int(counts[ALTERNATIVE[s]])
-        b = int(counts[STANDARD[s]])
-
-        if method == "greedy":
-            switch = a > b
-
-        elif method == "guarded95":
-            switch = confidence(a, b) >= .95
-
-        elif method == "cost5":
-
-            mu = (a + 1) / (a + b + 2)
-            tail = confidence(a, b)
-
-            gain = max(
-                0.0,
-                2 * mu * confidence(a + 1, b) - tail
-            )
-
-            harm = max(
-                0.0,
-                gain - (2 * mu - 1)
-            )
-
-            switch = gain > 5 * harm + 1e-12
-
-        else:
-            raise ValueError(
-                f"unknown policy {method}"
-            )
-
-        if switch:
-            table[s] = ALTERNATIVE[s]
-
-    return table
 
 
 def success(
@@ -415,28 +363,6 @@ def verify_m31(root: Path = M31) -> dict:
 # 5. INITIALIZE DECODER STRATEGIES
 # ==========================================
 
-def initial_tables(
-    counts: np.ndarray
-) -> dict[str, np.ndarray]:
-
-    return {
-        "standard": STANDARD.copy(),
-
-        "fixed_greedy":
-            policy(counts, "greedy"),
-
-        "fixed_guarded95":
-            policy(counts, "guarded95"),
-
-        "fixed_cost5":
-            policy(counts, "cost5"),
-
-        "periodic_cost5":
-            policy(counts, "cost5"),
-
-        "drift_cost5":
-            policy(counts, "cost5"),
-    }
 
 
 # ==========================================
