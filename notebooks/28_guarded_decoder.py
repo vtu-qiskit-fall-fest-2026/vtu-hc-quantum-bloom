@@ -15,6 +15,10 @@ from math import comb
 from pathlib import Path
 
 import numpy as np
+from qtrace.qec.decoder_policies import (
+    alternative_confidence,
+    guarded_decoder as core_guarded_decoder,
+)
 
 THRESHOLD = 0.95
 BUDGETS = [32, 128, 256, 1024]
@@ -35,32 +39,12 @@ def load_m24(path):
     return module.learn_decoder
 
 
-@lru_cache(maxsize=100000)
-def alternative_confidence(n_alt, n_standard):
-    """P(theta > 0.5 | counts), with prior theta ~ Beta(1, 1).
-
-    Posterior: Beta(n_alt + 1, n_standard + 1).
-    Integer-parameter identity evaluates the probability without SciPy.
-    """
-    n_alt, n_standard = int(n_alt), int(n_standard)
-    n = n_alt + n_standard + 1
-    return sum(comb(n, k) for k in range(n_alt + 1)) / (2 ** n)
 
 
 def guarded_decoder(counts):
-    # Learner receives only observed counts, never true probabilities.
-    table = STANDARD.copy()
-    confidence = []
-    for s in range(4):
-        base = int(STANDARD[s])
-        alt = int(ALTERNATIVE[s])
-        probability = alternative_confidence(
-            int(counts[alt]), int(counts[base])
-        )
-        confidence.append(probability)
-        if probability >= THRESHOLD:
-            table[s] = alt
-    return table, confidence
+    return core_guarded_decoder(
+        counts, threshold=THRESHOLD
+    )
 
 
 def make_distribution(target_syndrome, ratio):
