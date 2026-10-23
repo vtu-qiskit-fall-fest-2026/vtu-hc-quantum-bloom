@@ -1,0 +1,1765 @@
+{
+  "prepared_utc": "2026-10-23T00:02:07.271685+00:00",
+  "backend": "ibm_marrakesh",
+  "shots": 128,
+  "blocks": 3,
+  "initial_layout": [
+    7,
+    8,
+    6,
+    17,
+    5
+  ],
+  "seed": 220031,
+  "cases": [
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 61,
+      "pub_index": 0
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 9,
+      "pub_index": 1
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 30,
+      "pub_index": 2
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 66,
+      "pub_index": 3
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 71,
+      "pub_index": 4
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 6,
+      "pub_index": 5
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 26,
+      "pub_index": 6
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 57,
+      "pub_index": 7
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 63,
+      "pub_index": 8
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 53,
+      "pub_index": 9
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 40,
+      "pub_index": 10
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 65,
+      "pub_index": 11
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 14,
+      "pub_index": 12
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 68,
+      "pub_index": 13
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 12,
+      "pub_index": 14
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 62,
+      "pub_index": 15
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 7,
+      "pub_index": 16
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 48,
+      "pub_index": 17
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 24,
+      "pub_index": 18
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 37,
+      "pub_index": 19
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 19,
+      "pub_index": 20
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 22,
+      "pub_index": 21
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 69,
+      "pub_index": 22
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 18,
+      "pub_index": 23
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 32,
+      "pub_index": 24
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 59,
+      "pub_index": 25
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 13,
+      "pub_index": 26
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 15,
+      "pub_index": 27
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 51,
+      "pub_index": 28
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 43,
+      "pub_index": 29
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 33,
+      "pub_index": 30
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 52,
+      "pub_index": 31
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 49,
+      "pub_index": 32
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 8,
+      "pub_index": 33
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 47,
+      "pub_index": 34
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 35,
+      "pub_index": 35
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 54,
+      "pub_index": 36
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 20,
+      "pub_index": 37
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 45,
+      "pub_index": 38
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 1,
+      "pub_index": 39
+    },
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 60,
+      "pub_index": 40
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 29,
+      "pub_index": 41
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 4,
+      "pub_index": 42
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 0,
+      "pub_index": 43
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 25,
+      "pub_index": 44
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 27,
+      "pub_index": 45
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 3,
+      "pub_index": 46
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 39,
+      "pub_index": 47
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 23,
+      "pub_index": 48
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 42,
+      "pub_index": 49
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 38,
+      "pub_index": 50
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 64,
+      "pub_index": 51
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 50,
+      "pub_index": 52
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 36,
+      "pub_index": 53
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 31,
+      "pub_index": 54
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 46,
+      "pub_index": 55
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 5,
+      "pub_index": 56
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 2,
+      "pub_index": 57
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 70,
+      "pub_index": 58
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 21,
+      "pub_index": 59
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 17,
+      "pub_index": 60
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 28,
+      "pub_index": 61
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 10,
+      "pub_index": 62
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 11,
+      "pub_index": 63
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 67,
+      "pub_index": 64
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 34,
+      "pub_index": 65
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 44,
+      "pub_index": 66
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 41,
+      "pub_index": 67
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 16,
+      "pub_index": 68
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 0,
+      "source_circuit": 55,
+      "pub_index": 69
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 58,
+      "pub_index": 70
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 0,
+      "source_circuit": 56,
+      "pub_index": 71
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 33,
+      "pub_index": 72
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 5,
+      "pub_index": 73
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 58,
+      "pub_index": 74
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 25,
+      "pub_index": 75
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 20,
+      "pub_index": 76
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 42,
+      "pub_index": 77
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 54,
+      "pub_index": 78
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 59,
+      "pub_index": 79
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 0,
+      "pub_index": 80
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 26,
+      "pub_index": 81
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 24,
+      "pub_index": 82
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 37,
+      "pub_index": 83
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 16,
+      "pub_index": 84
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 6,
+      "pub_index": 85
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 55,
+      "pub_index": 86
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 50,
+      "pub_index": 87
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 67,
+      "pub_index": 88
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 39,
+      "pub_index": 89
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 41,
+      "pub_index": 90
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 68,
+      "pub_index": 91
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 66,
+      "pub_index": 92
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 71,
+      "pub_index": 93
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 46,
+      "pub_index": 94
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 32,
+      "pub_index": 95
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 23,
+      "pub_index": 96
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 10,
+      "pub_index": 97
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 56,
+      "pub_index": 98
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 47,
+      "pub_index": 99
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 7,
+      "pub_index": 100
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 44,
+      "pub_index": 101
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 4,
+      "pub_index": 102
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 2,
+      "pub_index": 103
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 19,
+      "pub_index": 104
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 18,
+      "pub_index": 105
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 13,
+      "pub_index": 106
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 52,
+      "pub_index": 107
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 43,
+      "pub_index": 108
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 17,
+      "pub_index": 109
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 15,
+      "pub_index": 110
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 40,
+      "pub_index": 111
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 57,
+      "pub_index": 112
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 34,
+      "pub_index": 113
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 9,
+      "pub_index": 114
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 31,
+      "pub_index": 115
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 62,
+      "pub_index": 116
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 45,
+      "pub_index": 117
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 27,
+      "pub_index": 118
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 11,
+      "pub_index": 119
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 3,
+      "pub_index": 120
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 1,
+      "pub_index": 121
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 38,
+      "pub_index": 122
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 63,
+      "pub_index": 123
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 12,
+      "pub_index": 124
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 70,
+      "pub_index": 125
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 35,
+      "pub_index": 126
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 21,
+      "pub_index": 127
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 49,
+      "pub_index": 128
+    },
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 61,
+      "pub_index": 129
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 22,
+      "pub_index": 130
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 64,
+      "pub_index": 131
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 28,
+      "pub_index": 132
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 53,
+      "pub_index": 133
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 14,
+      "pub_index": 134
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 69,
+      "pub_index": 135
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 30,
+      "pub_index": 136
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 51,
+      "pub_index": 137
+    },
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 60,
+      "pub_index": 138
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 65,
+      "pub_index": 139
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 36,
+      "pub_index": 140
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 48,
+      "pub_index": 141
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 1,
+      "source_circuit": 8,
+      "pub_index": 142
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": true,
+      "block": 1,
+      "source_circuit": 29,
+      "pub_index": 143
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 28,
+      "pub_index": 144
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 0,
+      "pub_index": 145
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 26,
+      "pub_index": 146
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 40,
+      "pub_index": 147
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 71,
+      "pub_index": 148
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 52,
+      "pub_index": 149
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 22,
+      "pub_index": 150
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 58,
+      "pub_index": 151
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 38,
+      "pub_index": 152
+    },
+    {
+      "state": "+i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 53,
+      "pub_index": 153
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 63,
+      "pub_index": 154
+    },
+    {
+      "state": "-i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 62,
+      "pub_index": 155
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 35,
+      "pub_index": 156
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 32,
+      "pub_index": 157
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 45,
+      "pub_index": 158
+    },
+    {
+      "state": "-",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 44,
+      "pub_index": 159
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 4,
+      "pub_index": 160
+    },
+    {
+      "state": "+",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 29,
+      "pub_index": 161
+    },
+    {
+      "state": "+",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 33,
+      "pub_index": 162
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 30,
+      "pub_index": 163
+    },
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 61,
+      "pub_index": 164
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 47,
+      "pub_index": 165
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 9,
+      "pub_index": 166
+    },
+    {
+      "state": "-",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 46,
+      "pub_index": 167
+    },
+    {
+      "state": "0",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 8,
+      "pub_index": 168
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 48,
+      "pub_index": 169
+    },
+    {
+      "state": "1",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 23,
+      "pub_index": 170
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 25,
+      "pub_index": 171
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 18,
+      "pub_index": 172
+    },
+    {
+      "state": "+",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 34,
+      "pub_index": 173
+    },
+    {
+      "state": "+i",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 49,
+      "pub_index": 174
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 57,
+      "pub_index": 175
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 12,
+      "pub_index": 176
+    },
+    {
+      "state": "-i",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 60,
+      "pub_index": 177
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 36,
+      "pub_index": 178
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 14,
+      "pub_index": 179
+    },
+    {
+      "state": "0",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 1,
+      "pub_index": 180
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 17,
+      "pub_index": 181
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 7,
+      "pub_index": 182
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 67,
+      "pub_index": 183
+    },
+    {
+      "state": "-i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 66,
+      "pub_index": 184
+    },
+    {
+      "state": "0",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 5,
+      "pub_index": 185
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 54,
+      "pub_index": 186
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 64,
+      "pub_index": 187
+    },
+    {
+      "state": "-",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 39,
+      "pub_index": 188
+    },
+    {
+      "state": "1",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 15,
+      "pub_index": 189
+    },
+    {
+      "state": "1",
+      "fault": "X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 16,
+      "pub_index": 190
+    },
+    {
+      "state": "+",
+      "fault": "none",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 24,
+      "pub_index": 191
+    },
+    {
+      "state": "+",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 31,
+      "pub_index": 192
+    },
+    {
+      "state": "-i",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 65,
+      "pub_index": 193
+    },
+    {
+      "state": "+i",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 59,
+      "pub_index": 194
+    },
+    {
+      "state": "-",
+      "fault": "X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 41,
+      "pub_index": 195
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 20,
+      "pub_index": 196
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 68,
+      "pub_index": 197
+    },
+    {
+      "state": "+i",
+      "fault": "X0X1",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 56,
+      "pub_index": 198
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 3,
+      "pub_index": 199
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 43,
+      "pub_index": 200
+    },
+    {
+      "state": "-",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 42,
+      "pub_index": 201
+    },
+    {
+      "state": "-",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 37,
+      "pub_index": 202
+    },
+    {
+      "state": "+",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 27,
+      "pub_index": 203
+    },
+    {
+      "state": "1",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 21,
+      "pub_index": 204
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 51,
+      "pub_index": 205
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 10,
+      "pub_index": 206
+    },
+    {
+      "state": "+i",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 55,
+      "pub_index": 207
+    },
+    {
+      "state": "-i",
+      "fault": "Z0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 70,
+      "pub_index": 208
+    },
+    {
+      "state": "1",
+      "fault": "none",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 13,
+      "pub_index": 209
+    },
+    {
+      "state": "1",
+      "fault": "X2",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 19,
+      "pub_index": 210
+    },
+    {
+      "state": "0",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 2,
+      "pub_index": 211
+    },
+    {
+      "state": "0",
+      "fault": "Z0",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 11,
+      "pub_index": 212
+    },
+    {
+      "state": "-i",
+      "fault": "X0X1",
+      "recovery": true,
+      "block": 2,
+      "source_circuit": 69,
+      "pub_index": 213
+    },
+    {
+      "state": "0",
+      "fault": "X2",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 6,
+      "pub_index": 214
+    },
+    {
+      "state": "+i",
+      "fault": "X0",
+      "recovery": false,
+      "block": 2,
+      "source_circuit": 50,
+      "pub_index": 215
+    }
+  ],
+  "qpy_sha256": "c71e91252d82da6d15bfa5f1ea6de0773a3c89710ad0e0668ce40da9fe14d9d2",
+  "versions": {
+    "qiskit": "2.6.1",
+    "qiskit-ibm-runtime": "0.51.0"
+  },
+  "primary_metric": "decoded_full_success",
+  "primary_group": [
+    "X0",
+    "X1",
+    "X2"
+  ],
+  "limitations": [
+    "Controlled injected faults; not a break-even experiment.",
+    "Initial layout matched; routing may still differ.",
+    "Blocks share one job and are not independent hardware sessions.",
+    "Publication order is not guaranteed execution chronology.",
+    "No postselection; all shots enter success rates.",
+    "Q-TRACE diagnosis is not yet selecting the decoder."
+  ],
+  "submission_started_utc": "2026-10-23T00:02:28.599359+00:00",
+  "job_id": "dbda85s24mrc73cl38m0"
+}

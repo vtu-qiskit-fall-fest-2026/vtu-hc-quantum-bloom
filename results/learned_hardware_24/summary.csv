@@ -1,0 +1,5 @@
+environment,method,test_shots,calibration_shots,logical_success,decoded_full_success
+single_dominant,standard,768,0,0.7721354166666666,0.7018229166666666
+single_dominant,learned,768,256,0.7786458333333334,0.7083333333333334
+correlated,standard,768,0,0.68359375,0.6315104166666666
+correlated,learned,768,256,0.74609375,0.6861979166666666
