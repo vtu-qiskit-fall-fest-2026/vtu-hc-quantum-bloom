@@ -19,8 +19,10 @@ from qiskit.transpiler.preset_passmanagers import (
     generate_preset_pass_manager,
 )
 
+from qtrace.qec.repetition import STANDARD, syndrome
+from qtrace.qec.decoder import learn_decoder
+
 STATES = ["0", "1", "+", "-", "+i", "-i"]
-STANDARD = [0, 1, 4, 2]  # Indexed by integer syndrome.
 
 # Harness only: these probabilities never enter learn_decoder().
 ENVIRONMENTS = {
@@ -57,9 +59,6 @@ def write_csv(path, rows):
         writer.writerows(rows)
 
 
-def syndrome(mask):
-    b0, b1, b2 = [(mask >> i) & 1 for i in range(3)]
-    return (b0 ^ b1) + 2 * (b1 ^ b2)
 
 
 def prepare_state(qc, q, state):
@@ -126,37 +125,6 @@ def circuit(state, mask, decoder=None, calibration=False):
     return qc
 
 
-def learn_decoder(joint_counts):
-    """Only measured (syndrome, data word) counts enter this function.
-
-    Choose between the two X masks compatible with each syndrome.
-    A symmetric pseudocount is used; ties keep the standard decoder.
-    """
-    table = STANDARD.copy()
-    evidence = {}
-
-    for s in range(4):
-        candidates = [m for m in range(8) if syndrome(m) == s]
-        scores = {
-            m: 1 + joint_counts.get((s, m), 0)
-            for m in candidates
-        }
-        best = max(scores.values())
-        winners = [m for m in candidates if scores[m] == best]
-        table[s] = STANDARD[s] if STANDARD[s] in winners else winners[0]
-
-        evidence[str(s)] = {
-            "candidate_counts": {
-                str(m): scores[m] - 1 for m in candidates
-            },
-            "incompatible_observations": sum(
-                n for (observed_s, m), n in joint_counts.items()
-                if observed_s == s and m not in candidates
-            ),
-            "chosen_mask": table[s],
-        }
-
-    return table, evidence
 
 
 def service():
