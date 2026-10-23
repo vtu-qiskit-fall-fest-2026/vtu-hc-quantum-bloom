@@ -1,11 +1,10 @@
-
 <div align="center">
 
 # Quantum Bloom
 
 ### Q-TRACE — Uncertainty-Aware Quantum Noise Diagnosis, Mitigation & Recovery
 
-**VTU-QFF-HC-0160** &nbsp;|&nbsp; Tier: **Online**
+**VTU-QFF-HC-0160**  |  Tier: **Online**
 
 **Track 3 — Quantum Hardware & Error Correction**
 
@@ -36,9 +35,10 @@
 - [Approach & Architecture](#-approach--architecture)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
+- [Installable Core & Validation](#-installable-core--validation)
 - [How to Run](#-how-to-run)
 - [How to Push Code](#-how-to-push-code)
-- [Submission Checklist](#-submission-checklist)
+- [Release & Submission Checklist](#-release--submission-checklist)
 - [Resources](#-resources)
 - [License](#-license)
 
@@ -66,7 +66,7 @@ Quantum Bloom is a solo-entry team. The project is developed and evaluated withi
 
 ## 💡 Proposed Solution
 
-**Solution:** **Q-TRACE** is a hybrid quantum–classical experimental framework that uses diagnostic measurements to characterize a restricted Pauli-noise model and makes shot-budget-aware decisions about observable estimation. It compares adaptive and fixed characterization, decides whether to mitigate an affected observable, and evaluates the outcome against raw measurements under equal *total* shot budgets. A separate hardware branch investigates syndrome measurement and recovery using a three-qubit repetition code.
+**Solution:** **Q-TRACE** is a hybrid quantum–classical experimental framework that uses diagnostic measurements to characterize a restricted Pauli-noise model and makes shot-budget-aware decisions about observable estimation. It compares adaptive and fixed characterization, decides whether to mitigate an affected observable, and evaluates the outcome against raw measurements under equal **total** shot budgets. A separate hardware branch investigates syndrome measurement and recovery using a three-qubit repetition code.
 
 **Key idea:** **Optimize the quality of the final quantum estimate—not merely fault-identification accuracy—by jointly accounting for diagnostic information, mitigation uncertainty, and remaining measurement shots.**
 
@@ -102,12 +102,18 @@ flowchart LR
     C --> H[Separate repetition-code syndrome data]
     H --> I[Standard or learned recovery decoder]
     I --> J[IBM QPU pilot evaluation]
+    H --> K[Offline drift-aware and temporal MAP decoding]
+    K --> L[Seeded simulations and Aer validation]
 ```
 
 1. **Input** — A target quantum circuit, Pauli observable(s), candidate single-Pauli fault models and a total measurement-shot budget. Hardware QEC experiments instead use encoded input states, controlled fault patterns and measured syndromes.
+
 2. **Preprocessing** — Construct informative Pauli probes, compute fault signatures or observable attenuation, and define validation/test splits and measurement budgets before evaluation.
+
 3. **Quantum core** — Generate and sample circuits with Qiskit Aer; use Statevector/Pauli analysis to verify observable relationships. The hardware branch uses a three-data-qubit repetition code, two syndrome ancillas, dynamic-circuit recovery and `SamplerV2` on IBM Quantum.
+
 4. **Post-processing** — Update uncertainty over the noise model, compare fixed and adaptive calibration policies, decide whether mitigation is worth its expected MSE, and decode syndromes using a standard or calibration-learned lookup table where applicable.
+
 5. **Output** — Observable estimates with **all diagnostic and application shots accounted for**, held-out MSE tables and confidence intervals, plus separate simulator/hardware recovery-success results and preserved experimental records.
 
 **Reproducibility rules:** Held-out ideal expectations are used **only to score** estimates, not to select mitigation actions. Calibration and application shots are both charged to the total budget; refusing mitigation returns a raw estimate rather than removing the case. Calibration transfer initially assumes a sufficiently stable noise model; readout error and drift are investigated as stress tests.
@@ -132,39 +138,65 @@ flowchart LR
 
 ```text
 vtu-hc-quantum-bloom/
-├── README.md                         # Project overview and reproduction guide
-├── requirements.txt                  # Python dependencies (synchronize before submission)
+├── README.md                          # Methods, evidence, reproduction guide
+├── pyproject.toml                     # Installable package and dependency metadata
+├── requirements.txt                   # -e .[experiments,dev]
 ├── .gitignore
 ├── LICENSE
-├── notebooks/                        # Runnable Python research experiments (.py)
-│   ├── 01_pauli_identifiability.py   # Identifiability limitations
-│   ├── 03_bayesian_active_diagnosis.py
-│   ├── 09_information_limits.py     # Restricted-model information limits
-│   ├── 14_mitigation_pilot.py        # Diagnosis-to-mitigation pilot
-│   ├── 15_robustness.py              # Readout/drift stress conditions
-│   ├── 18_prior_ablation.py          # Decision-policy implementation
-│   ├── 19_dp_verification.py         # Dynamic-programming risk checks
-│   ├── 20_locked_benchmark.py        # Main validation-locked Aer benchmark
-│   ├── 21_repetition_qec.py         # Repetition-code mechanism test
-│   ├── 22_matched_hardware.py        # Matched hardware recovery controls
-│   ├── 24_learned_hardware.py        # Calibration-learned QPU decoder
-│   └── 31_policy_hardware.py         # Hardware policy experiment (separate)
+├── src/qtrace/                        # Reusable, installable Python core
+│   ├── diagnosis/                     # Pauli signatures and Bayesian inference
+│   │   ├── pauli.py
+│   │   └── bayesian.py
+│   ├── policies/                      # Stopping and mitigation decisions
+│   │   ├── stopping.py
+│   │   └── mitigation.py
+│   ├── qec/                           # Repetition code and recovery decoders
+│   │   ├── repetition.py
+│   │   ├── decoder.py
+│   │   ├── decoder_policies.py
+│   │   ├── drift.py
+│   │   ├── drift_policies.py
+│   │   └── temporal.py
+│   └── evaluation/
+│       └── metrics.py
+├── tests/                             # 62 Python unittest cases (Phase 10)
+├── scripts/
+│   └── final_audit.sh                 # 12-step offline integration audit
+├── notebooks/                         # Numbered research experiments (.py)
+│   ├── 19_dp_verification.py
+│   ├── 20_locked_benchmark.py         # Main locked Aer mitigation benchmark
+│   ├── 21_repetition_qec.py          # Repetition-code mechanism on Aer
+│   ├── 24_learned_hardware.py        # Locked IBM hardware QEC pilot
+│   ├── 27_decoder_generalization.py
+│   ├── 28_guarded_decoder.py
+│   ├── 29_cost_sensitive_decoder.py
+│   ├── 31_policy_hardware.py         # Historical hardware policy protocol
+│   └── 32_drift_aware_decoder.py     # Offline drift-aware benchmark
 ├── qec/
-│   └── m33_repetition.py             # Experimental repetition-code utilities
-└── results/                          # Generated artifacts; publish a curated subset
+│   └── m33_repetition.py              # Temporal MAP simulation and Aer runner
+└── results/                           # Preserved and curated experiment evidence
     ├── locked_benchmark_20/
-    │   ├── protocol.json
-    │   ├── overall.csv
-    │   └── comparisons.csv
     ├── matched_hardware_22/
-    │   ├── manifest.json
-    │   └── summary_by_fault.csv
     └── learned_hardware_24/
-        ├── summary.csv
-        └── by_state.csv
 ```
 
 The full repository includes additional numbered research experiments. These are **Python scripts**, not Jupyter `.ipynb` notebooks. No `src/main.py` entry point is required for the current implementation.
+
+---
+
+## 📦 Installable Core & Validation
+
+The refactored branch `refactor/qtrace-core` is an editable Python package. Reusable mathematical and decoding functions live under `src/qtrace/`; the numbered experiment scripts remain separate entry points so their protocols and recorded outputs can be audited independently.
+
+The core modules cover Pauli diagnostics, Bayesian updating, shot-budget-aware stopping/mitigation, calibration-learned and guarded/cost-sensitive repetition-code decoding, Fisher-test-based drift monitoring, and multi-round temporal MAP decoding. The temporal decoder targets a **Z-basis logical bit** in a three-qubit X-noise repetition-memory model; it does **not** demonstrate arbitrary-state or fault-tolerant QEC.
+
+**Validated refactor evidence (Python 3.11, local environment):**
+
+- **62/62 unit tests passed** in a fresh virtual environment installed using `pip install -r requirements.txt`.
+- **12/12 integration audit commands completed** with `scripts/final_audit.sh`, including local Qiskit Aer tests; no IBM QPU jobs were submitted by the audit.
+- Pre/post-refactor deterministic comparisons preserved the selected numerical outputs from M20, M21, M28, M29, M32 and M33. For M33, the MAP lookup snapshots, seeded simulation CSV files and local Aer output were identical.
+
+These checks establish the tested refactor's consistency, not an across-hardware performance or fault-tolerance guarantee. Original source-hash locks, job identifiers, protocols and published hardware artifacts are **historical provenance**: do not silently overwrite, rehash, or resume old hardware jobs with modified scripts.
 
 ---
 
@@ -172,9 +204,12 @@ The full repository includes additional numbered research experiments. These are
 
 ### Prerequisites
 
-- Python **3.11** (recommended for the tested IBM Runtime environment)
+- Python **3.11** (the validated development and clean-install environment)
+
 - [Git](https://git-scm.com/downloads)
+
 - Internet access only for cloning/dependencies and **optional** IBM QPU operations
+
 - An IBM Quantum account and authorized instance **only if submitting real hardware jobs**; **no token** is required for local Aer tests
 
 ### 1. Clone the repository
@@ -184,7 +219,14 @@ git clone https://github.com/vtu-qiskit-fall-fest-2026/vtu-hc-quantum-bloom.git
 cd vtu-hc-quantum-bloom
 ```
 
-The experiment scripts must be present in `notebooks/`. If cloning before the submission branch has been merged, checkout the published source branch first.
+The current refactor is on the `refactor/qtrace-core` branch, so until it has been merged, run:
+
+```bash
+git fetch origin
+git switch refactor/qtrace-core
+```
+
+Keep existing experiment evidence on `main` intact; this README describes the refactored branch.
 
 ### 2. Create a virtual environment
 
@@ -202,7 +244,12 @@ python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 ```
 
-**Before submission:** Replace the starter `requirements.txt` (`qiskit<2.0`) with versions compatible with the tested Qiskit 2.x stack listed above. Otherwise the requirements file does **not** reproduce the hardware environment used here. A matching `requirements.txt` is provided alongside this README draft.
+`requirements.txt` installs the editable package using `-e .[experiments,dev]`. Its direct requirements are defined in `pyproject.toml` (Qiskit 2.6.1, Aer 0.18.0, IBM Runtime 0.51.0 in the validated stack). Transitive dependencies are resolved by pip and are not yet frozen in an OS-independent lockfile. Check installation with:
+
+```bash
+python -m pip check
+python -m unittest discover -s tests -p 'test_*.py' -v
+```
 
 ### 4. Run
 
@@ -232,21 +279,33 @@ Each run uses a **new output directory** because some scripts deliberately refus
 
 **Real IBM hardware (optional):** Set up an IBM Quantum Platform API key securely **outside the repository**, check account/instance access, and run the `prepare` step of an experiment before choosing whether to `submit`. Hardware execution consumes QPU quota. For example, the existing matched-hardware workflow is implemented in `notebooks/22_matched_hardware.py` with `prepare`, `submit`, and `collect` actions; review the plan and backend compatibility before submitting. Do not place API credentials in source files or commits.
 
-### 5. Run the tests
+### 5. Run unit tests and the offline final audit
+
+```bash
+# Full unit suite: 62 tests in the validated Phase 10 environment
+python -m unittest discover -s tests -p 'test_*.py' -v
+
+# Local integration checks across selected missions; produces new /tmp output
+bash scripts/final_audit.sh
+```
+
+The final audit checks packaging and M20/M21/M24/M27/M28/M29/M31/M32/M33 via small smoke runs or selftests. It does **not** re-run full research-scale statistical studies and does **not** submit hardware jobs. For standalone sanity checks:
 
 ```bash
 python notebooks/24_learned_hardware.py selftest
 python notebooks/31_policy_hardware.py selftest
-python notebooks/19_dp_verification.py --help
+python notebooks/32_drift_aware_decoder.py selftest
+python qec/m33_repetition.py selftest
+python qec/m33_repetition.py run-aer --rounds 3 --shots 128
 ```
 
-These are script-level checks, **not** a claim that a formal `pytest` suite exists. If `31_policy_hardware.py` has been edited since the supplied snapshot, rerun its selftest before publishing. The `19_dp_verification.py --help` command checks the CLI/import path only; it does not execute the verification benchmark.
+M24/M31 hardware protocol files include source hashes; older runs must be interpreted with their recorded source versions and calibration locks. A passing selftest alone does not establish interchangeability with previously submitted IBM jobs.
 
 ---
 
 ## 🔁 How to Push Code
 
-> Full walkthrough: **[Git & Collaboration Handbook](../vtu-hc-guide-git-and-collaboration)** — branch-based collaboration, pull requests, reviews and conflict resolution.
+> Full walkthrough: [Git & Collaboration Handbook](../vtu-hc-guide-git-and-collaboration) — branch-based collaboration, pull requests, reviews and conflict resolution.
 
 ### Configure Git (first time only)
 
@@ -255,42 +314,26 @@ git config --global user.name  "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-### Everyday workflow
+### Refactor branch workflow
+
+Stage **only the source, package metadata, documentation, and audit script**, and inspect the staged patch before pushing. Preserve the curated historical artifacts in `results/` unchanged.
 
 ```bash
-# 1. Review your current branch and changed files
-git status
+git branch --show-current          # expect refactor/qtrace-core
+git status --short
+git diff --check
+git diff --name-status main -- results/
 
-git branch --show-current
-
-# 2. Keep working on your existing feature branch, or create one from main
-# git switch -c feature/qtrace-submission
-
-# 3. Stage source and documentation explicitly; avoid virtual environments
-git add README.md requirements.txt .gitignore notebooks/ qec/
-
-# 4. Stage only the evidence needed for the README claims
-git add results/locked_benchmark_20/protocol.json \
-  results/locked_benchmark_20/overall.csv \
-  results/locked_benchmark_20/comparisons.csv \
-  results/matched_hardware_22/summary_by_fault.csv \
-  results/matched_hardware_22/manifest.json \
-  results/learned_hardware_24/summary.csv \
-  results/learned_hardware_24/by_state.csv
-
-# 5. Check exactly what will be published
+# Stage just Phase 10 files; stage earlier source-phase commits separately.
+git add README.md pyproject.toml requirements.txt scripts/final_audit.sh
 git diff --cached --stat
 git diff --cached --check
 
-# 6. Commit and push your CURRENT feature branch
-git commit -m "docs: document Q-TRACE methods and validated results"
-git push -u origin HEAD
-
-# 7. Open a Pull Request targeting main; merge after review
-# https://github.com/vtu-qiskit-fall-fest-2026/vtu-hc-quantum-bloom/pulls
+git commit -m "chore: finalize Q-TRACE packaging and reproducibility audit"
+git push -u origin refactor/qtrace-core
 ```
 
-**Important:** Ensure `.venv/`, `.venv-ibm/`, `.git/`, API keys and other generated private or large files are **not staged**. Avoid `git add .` until `.gitignore` has been checked. Never force-push a shared branch without coordination.
+Review any changes under `results/` and any newly staged files before committing. Do not stage `.venv/`, `.venv-ibm/`, tokens, secrets, or generated data. The branch can be proposed for merge through a Pull Request after a provenance and content review; merging is **not** part of the offline audit.
 
 ### Commit message convention
 
@@ -317,26 +360,28 @@ git pull --rebase       # integrate remote changes when appropriate
 ### Collaborating on the same repo
 
 - **Use feature branches and Pull Requests** rather than pushing unreviewed changes directly to `main`.
+
 - **Pull before pushing** and inspect conflicts carefully.
+
 - **Commit focused changes** that are reproducible and easy to review.
+
 - **Preserve hardware job IDs, immutable calibration/test splits and protocol files** as experimental provenance; avoid replacing published results silently.
+
 - **Check for leaked credentials and oversized files** before making the submission branch public.
 
 ---
 
-## ✅ Submission Checklist
+## ✅ Release & Submission Checklist
 
-- [x] Repository created and **public**
-- [x] Solo team member identified under [Team Members](#-team-members-github-ids)
-- [x] Q-TRACE problem, approach, evaluation protocol, and limitations documented in this README draft
-- [x] Aer results and IBM QPU pilot outputs exist in the reviewed project archive
-- [ ] Replace the repository's template README with this version
-- [ ] Update `requirements.txt` for Qiskit 2.x; verify the install from a clean clone
-- [ ] Add `.venv-ibm/` to `.gitignore` and audit staged files for credentials
-- [ ] Push source code and **curated** results to the feature branch, then merge into `main`
-- [ ] Confirm the README's commands and linked result files work from the published `main`
-- [ ] Add a demo screenshot or video **if available** (do not invent a link)
-- [ ] Submit the repository URL and project summary on the hackathon portal
+- [x] Problem statement, evaluation protocol, limitations, and experimental evidence documented.
+- [x] Qiskit 2.x-compatible editable package installed in a fresh Python 3.11 environment.
+- [x] 62 unit tests and 12 local integration checks passed.
+- [x] Virtual environments excluded by `.gitignore` (verify staged files before pushing).
+- [ ] Replace and review `README.md` on `refactor/qtrace-core` with this updated version.
+- [ ] Review `git diff --name-status main -- results/` and preserve historical hardware evidence and source-hash locks.
+- [ ] Commit, push the refactor branch, and verify commands/links from the published branch.
+- [ ] Decide separately whether to merge into `main`; review the reproducibility/provenance implications first.
+- [ ] Verify any hackathon portal submission status independently; code audit does not submit to a portal.
 
 ---
 
@@ -366,6 +411,7 @@ Released under the [MIT License](LICENSE). See `LICENSE` for details.
 <div align="center">
 
 **Quantum Bloom** · Team ID `VTU-QFF-HC-0160` · Tier `Online`
+
 · Built with ⚛️ Qiskit for the VTU-QFF Hackathon
 
 [⬆ Back to Top](#quantum-bloom)
