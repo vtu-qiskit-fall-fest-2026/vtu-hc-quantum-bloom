@@ -1,0 +1,68 @@
+{
+  "backend": "aer",
+  "validation_targets": 16,
+  "validation_repeats": 5,
+  "targets": 48,
+  "repeats": 20,
+  "smoke": false,
+  "output": null,
+  "budgets": [
+    128,
+    512
+  ],
+  "validation_seed": 200031,
+  "test_seed": 200071,
+  "validation_backend": "analytic",
+  "test_backend": "aer",
+  "conditions": [
+    [
+      "clean",
+      0.0,
+      0.0
+    ],
+    [
+      "readout_1pct",
+      0.01,
+      0.0
+    ],
+    [
+      "readout_3pct",
+      0.03,
+      0.0
+    ],
+    [
+      "drift_up",
+      0.0,
+      0.03
+    ],
+    [
+      "drift_down",
+      0.0,
+      -0.03
+    ],
+    [
+      "readout_and_drift",
+      0.01,
+      0.03
+    ]
+  ],
+  "rates": [
+    0.04,
+    0.12,
+    0.24
+  ],
+  "second_moment": 0.26497528958302274,
+  "selection": "Minimum aggregate validation MSE per family and budget",
+  "weighting": "Equal conditions; equal cases and repeats within condition",
+  "fixed_candidates": "Both priors; 0 to budget-16 shots in steps of 16",
+  "adaptive_candidates": "Both priors; unchanged DP",
+  "primary_comparison": "Aggregate test MSE: adaptive minus fixed",
+  "limits": [
+    "New target and measurement seeds; same noise scenario family.",
+    "Validation simulation cost is offline development cost.",
+    "Each test trial counts calibration plus application shots.",
+    "Target-cluster CIs condition on selected configurations.",
+    "Per-condition comparisons are exploratory; no multiplicity correction.",
+    "No claim of hardware performance or QEC."
+  ]
+}
