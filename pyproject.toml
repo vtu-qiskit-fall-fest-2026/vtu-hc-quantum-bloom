@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qtrace-quantum-bloom"
+version = "0.1.0"
+description = "Q-TRACE: uncertainty-aware quantum noise diagnosis, mitigation and recovery"
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = [
+    "qiskit==2.6.1",
+    "numpy>=1.26,<3.0",
+    "scipy>=1.11,<2.0",
+]
+
+[project.optional-dependencies]
+experiments = [
+    "qiskit-aer==0.18.0",
+    "qiskit-ibm-runtime==0.51.0",
+    "pandas>=2.1,<3.0",
+    "matplotlib>=3.8,<4.0",
+]
+
+dev = [
+    "pytest>=8,<10",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["qtrace*"]

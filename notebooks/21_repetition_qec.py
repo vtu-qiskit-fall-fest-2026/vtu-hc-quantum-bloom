@@ -6,6 +6,8 @@ import json
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
 
+from qtrace.evaluation.metrics import score_repetition as score
+
 
 STATES = ["0", "1", "+", "-", "+i", "-i"]
 FAULTS = ["none", "X0", "X1", "X2", "X0X1", "Z0"]
@@ -88,26 +90,6 @@ def suite():
     return metadata, circuits
 
 
-def score(metadata, counts):
-    expected = int(metadata["state"] in ["1", "-", "-i"])
-    total = sum(counts.values())
-    logical_ok = 0
-    full_ok = 0
-    for bitstring, count in counts.items():
-        value = int(bitstring.replace(" ", ""), 2)
-        if (value & 1) == expected:
-            logical_ok += count
-        # out = q2 q1 q0; q1=q2=0 verifies return to code space
-        # after decoding, in addition to the q0 eigenbasis outcome.
-        if value == expected:
-            full_ok += count
-
-    return {
-        **metadata,
-        "shots": total,
-        "logical_success": logical_ok / total,
-        "decoded_full_success": full_ok / total,
-    }
 
 
 def save_results(output, metadata, all_counts, syndromes, ideal=False):

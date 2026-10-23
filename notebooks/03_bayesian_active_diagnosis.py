@@ -13,7 +13,11 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from scipy.special import xlogy
+from qtrace.diagnosis.bayesian import (
+    entropy,
+    information_gain as core_information_gain,
+    update_posterior as core_update_posterior,
+)
 from scipy.stats import binom
 
 
@@ -93,60 +97,18 @@ LIKELIHOODS = [
 # 3. BAYESIAN INFORMATION THEORY
 # ============================================================
 
-def entropy(probabilities):
-    """Shannon entropy in nats."""
-    return float(
-        -np.sum(xlogy(probabilities, probabilities))
-    )
 
 
 def information_gain(prior, probe_id):
-    """
-    Expected reduction in posterior entropy
-    after measuring one batch using this probe.
-    """
-
-    likelihood = LIKELIHOODS[probe_id]
-
-    # Predict the probability of each possible
-    # number of negative measurement outcomes.
-
-    predictive = likelihood @ prior
-
-    valid = predictive > 0
-
-    # Posterior conditioned on every possible outcome.
-
-    posterior = (
-        likelihood[valid] * prior[None, :]
-    ) / predictive[valid, None]
-
-    conditional_entropies = -np.sum(
-        xlogy(posterior, posterior),
-        axis=1,
+    return core_information_gain(
+        prior, LIKELIHOODS[probe_id]
     )
-
-    expected_future_entropy = float(
-        predictive[valid] @ conditional_entropies
-    )
-
-    return entropy(prior) - expected_future_entropy
 
 
 def update_posterior(prior, probe_id, count_minus):
-    """Bayesian update after one measurement batch."""
-
-    likelihood = LIKELIHOODS[probe_id][count_minus]
-
-    weights = prior * likelihood
-    normalizer = weights.sum()
-
-    if normalizer <= 0:
-        raise RuntimeError(
-            "Observation impossible under the assumed model"
-        )
-
-    return weights / normalizer
+    return core_update_posterior(
+        prior, LIKELIHOODS[probe_id][count_minus]
+    )
 
 
 # ============================================================

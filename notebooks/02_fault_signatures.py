@@ -16,6 +16,8 @@ from qiskit.quantum_info import Pauli, Statevector
 from qiskit_aer import AerSimulator
 from qiskit_aer.noise import pauli_error
 
+from qtrace.diagnosis.pauli import fault_pauli, expectation_from_counts
+
 
 P_ERROR = 0.10
 SHOTS = 4096
@@ -65,13 +67,6 @@ def prepare_state(mode):
 # 2. Represent a local Pauli error
 # --------------------------------------------------
 
-def fault_pauli(fault):
-    gate, qubit = fault
-
-    labels = ["I", "I"]
-    labels[1 - qubit] = gate
-
-    return Pauli("".join(labels))
 
 
 # --------------------------------------------------
@@ -131,23 +126,6 @@ def build_experiment(mode, observable, fault):
 # 5. Convert counts to Pauli expectation
 # --------------------------------------------------
 
-def expectation_from_counts(counts, observable):
-    total = sum(counts.values())
-    weighted = 0
-
-    for bitstring, count in counts.items():
-        bits = bitstring.replace(" ", "")
-
-        parity = sum(
-            int(bit)
-            for bit, op in zip(bits, observable)
-            if op != "I"
-        )
-
-        eigenvalue = (-1) ** parity
-        weighted += eigenvalue * count
-
-    return weighted / total
 
 
 # --------------------------------------------------

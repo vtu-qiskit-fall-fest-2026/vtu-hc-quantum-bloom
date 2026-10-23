@@ -15,6 +15,10 @@ from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
+from qtrace.qec.decoder_policies import (
+    posterior_moments,
+    cost_decoder,
+)
 
 STANDARD = np.array([0, 1, 4, 2], dtype=int)
 ALTERNATIVE = STANDARD ^ 7
@@ -88,31 +92,7 @@ def main():
     if m28.THRESHOLD != .95:
         raise ValueError("This comparison requires the unchanged M28 threshold.")
 
-    @lru_cache(maxsize=100000)
-    def posterior_moments(n_alt, n_standard):
-        """E[(2θ-1)+] and E[(1-2θ)+], θ posterior Beta(a+1,b+1)."""
-        mu = (n_alt + 1) / (n_alt + n_standard + 2)
-        tail = m28.alternative_confidence(n_alt, n_standard)
-        shifted_tail = m28.alternative_confidence(n_alt + 1, n_standard)
-        gain = max(0.0, 2 * mu * shifted_tail - tail)
-        harm = max(0.0, gain - (2 * mu - 1))
-        return gain, harm
 
-    def cost_decoder(counts, penalty):
-        table = STANDARD.copy()
-        for s in range(4):
-            a = int(counts[ALTERNATIVE[s]])
-            b = int(counts[STANDARD[s]])
-
-            if penalty == 1:
-                switch = a > b
-            else:
-                gain, harm = posterior_moments(a, b)
-                switch = gain > penalty * harm + 1e-12
-
-            if switch:
-                table[s] = ALTERNATIVE[s]
-        return table
 
     # Check symmetry, lambda=1 equivalence and nested switch decisions.
     rng_check = np.random.default_rng(290001)

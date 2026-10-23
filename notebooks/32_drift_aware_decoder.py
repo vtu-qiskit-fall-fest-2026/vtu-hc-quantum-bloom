@@ -20,6 +20,10 @@ from pathlib import Path
 
 import numpy as np
 
+from qtrace.qec.drift_policies import policy, initial_tables
+
+from qtrace.qec.drift import fisher_p_two_sided, detect_shift
+
 
 ROOT = Path(__file__).resolve().parents[1]
 M31 = ROOT / "results" / "policy_hardware_31"
@@ -123,60 +127,6 @@ def confidence(a: int, b: int) -> float:
     )
 
 
-def policy(
-    counts: np.ndarray,
-    method: str
-) -> np.ndarray:
-
-    counts = np.asarray(counts, dtype=int)
-
-    if counts.shape != (8,) or np.any(counts < 0):
-        raise ValueError(
-            "expected eight non-negative counts"
-        )
-
-    table = STANDARD.copy()
-
-    if method == "standard":
-        return table
-
-    for s in range(4):
-
-        a = int(counts[ALTERNATIVE[s]])
-        b = int(counts[STANDARD[s]])
-
-        if method == "greedy":
-            switch = a > b
-
-        elif method == "guarded95":
-            switch = confidence(a, b) >= .95
-
-        elif method == "cost5":
-
-            mu = (a + 1) / (a + b + 2)
-            tail = confidence(a, b)
-
-            gain = max(
-                0.0,
-                2 * mu * confidence(a + 1, b) - tail
-            )
-
-            harm = max(
-                0.0,
-                gain - (2 * mu - 1)
-            )
-
-            switch = gain > 5 * harm + 1e-12
-
-        else:
-            raise ValueError(
-                f"unknown policy {method}"
-            )
-
-        if switch:
-            table[s] = ALTERNATIVE[s]
-
-    return table
 
 
 def success(
@@ -220,92 +170,8 @@ def oracle(p: np.ndarray) -> np.ndarray:
 # 3. NOISE DRIFT DETECTION
 # ==========================================
 
-def fisher_p_two_sided(
-    a: int,
-    b: int,
-    c: int,
-    d: int
-) -> float:
-    """Two-sided Fisher exact test."""
-
-    a, b, c, d = map(int, [a, b, c, d])
-
-    if min(a, b, c, d) < 0:
-        raise ValueError(
-            "negative contingency entry"
-        )
-
-    n1 = a + b
-    n2 = c + d
-    col_alt = a + c
-    total = n1 + n2
-
-    if not n1 or not n2:
-        return 1.0
-
-    den = math.comb(total, n1)
-
-    def mass(x):
-        return (
-            math.comb(col_alt, x)
-            * math.comb(total - col_alt, n1 - x)
-            / den
-        )
-
-    observed = mass(a)
-
-    low = max(
-        0,
-        n1 - (total - col_alt)
-    )
-
-    high = min(n1, col_alt)
-
-    return min(
-        1.0,
-        sum(
-            mass(x)
-            for x in range(low, high + 1)
-            if mass(x) <= observed * (1 + 1e-10)
-        )
-    )
 
 
-def detect_shift(
-    history: list[np.ndarray],
-    window: int,
-    alpha: float
-) -> tuple[bool, float]:
-    """
-    Detect distribution change in syndrome 1.
-
-    Compare historical and recent windows.
-    """
-
-    if len(history) < 2 * window:
-        return False, 1.0
-
-    old = np.sum(
-        history[-2 * window:-window],
-        axis=0
-    )
-
-    recent = np.sum(
-        history[-window:],
-        axis=0
-    )
-
-    base = int(STANDARD[1])
-    alt = int(ALTERNATIVE[1])
-
-    p_value = fisher_p_two_sided(
-        old[alt],
-        old[base],
-        recent[alt],
-        recent[base]
-    )
-
-    return p_value <= alpha, p_value
 
 
 # ==========================================
@@ -497,28 +363,6 @@ def verify_m31(root: Path = M31) -> dict:
 # 5. INITIALIZE DECODER STRATEGIES
 # ==========================================
 
-def initial_tables(
-    counts: np.ndarray
-) -> dict[str, np.ndarray]:
-
-    return {
-        "standard": STANDARD.copy(),
-
-        "fixed_greedy":
-            policy(counts, "greedy"),
-
-        "fixed_guarded95":
-            policy(counts, "guarded95"),
-
-        "fixed_cost5":
-            policy(counts, "cost5"),
-
-        "periodic_cost5":
-            policy(counts, "cost5"),
-
-        "drift_cost5":
-            policy(counts, "cost5"),
-    }
 
 
 # ==========================================
